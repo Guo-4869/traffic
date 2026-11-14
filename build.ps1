@@ -2,7 +2,7 @@
 param(
     [string]$Jdk,
     [string]$Proxy,
-    [string[]]$Tasks = @(':core:test', ':app:assembleDebug', ':app:lintDebug')
+    [string[]]$Tasks = @(':core:test', ':app:testDebugUnitTest', ':app:assembleDebug', ':app:lintDebug')
 )
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
@@ -10,7 +10,7 @@ if (!$Jdk) { $Jdk = $env:JAVA_HOME }
 if (!$Jdk -or !(Test-Path -LiteralPath "$Jdk\bin\javac.exe")) {
     $Jdk = Join-Path $root '.toolchain\jdk'
 }
-if (!(Test-Path -LiteralPath "$Jdk\bin\javac.exe")) { throw 'Set JAVA_HOME or pass -Jdk <JDK 17+ path>' }
+if (!(Test-Path -LiteralPath "$Jdk\bin\jlink.exe")) { throw 'A complete JDK 17+ including jlink is required. Run tools\bootstrap.ps1 -WithJdk or pass -Jdk.' }
 $env:JAVA_HOME = $Jdk
 $env:GRADLE_USER_HOME = Join-Path $root '.toolchain\gradle-home'
 $env:ANDROID_USER_HOME = Join-Path $root '.toolchain\android-user'

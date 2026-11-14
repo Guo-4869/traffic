@@ -129,8 +129,9 @@ final class Collector {
             previous = event.getTimeStamp();
             String pkg = event.getPackageName();
             if ((kind == SessionEngine.Kind.RESUME || kind == SessionEngine.Kind.PAUSE) && pkg == null) continue;
-            // Only the opaque instance integer is used. Never call getClassName().
-            int id = Build.VERSION.SDK_INT >= 29 ? event.getInstanceId() : 0;
+            // Public UsageEvents has no activity-instance ID. Keep package-level state;
+            // do not inspect class/page names or use hidden APIs.
+            int id = 0;
             engine.accept(new SessionEngine.Event(event.getTimeStamp(),kind,pkg,id));
         }
         if (!UsageAccess.granted(context) || !DeviceGate.canCollect(context)) throw new Deferred();

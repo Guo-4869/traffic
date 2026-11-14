@@ -7,7 +7,7 @@ New-Item -ItemType Directory -Force -Path $cache | Out-Null
 function Fetch([string]$Url, [string]$Name) {
     $dest = Join-Path $cache $Name
     if (Test-Path -LiteralPath $dest) { return $dest }
-    $arguments = @('--fail', '--location', '--retry', '2', '--connect-timeout', '20', '--max-time', '900', '--silent', '--show-error')
+    $arguments = @('--fail', '--location', '--ssl-no-revoke', '--retry', '2', '--connect-timeout', '20', '--max-time', '300', '--silent', '--show-error')
     if ($Proxy) { $arguments += @('--proxy', $Proxy) }
     & curl.exe @arguments $Url --output "$dest.part"
     if ($LASTEXITCODE -ne 0) { throw "Download failed: $Url" }

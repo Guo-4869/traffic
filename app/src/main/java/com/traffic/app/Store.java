@@ -23,7 +23,11 @@ final class Store extends SQLiteOpenHelper {
     }
     Store(Context context) { super(context, "traffic.db", null, 1); }
     @Override public void onConfigure(SQLiteDatabase db) {
-        db.execSQL("PRAGMA secure_delete=ON");
+        // This PRAGMA returns a row even when assigning; execSQL rejects row queries.
+        try (Cursor cursor=db.rawQuery("PRAGMA secure_delete=ON",null)) {
+            if (!cursor.moveToFirst() || cursor.getInt(0)!=1)
+                throw new SQLiteException("Unable to enable secure deletion");
+        }
     }
     @Override public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)");

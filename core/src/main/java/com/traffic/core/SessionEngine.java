@@ -31,6 +31,7 @@ public final class SessionEngine {
         public long boundary;
         public String focus;
         public long focusEnded;
+        public long lastUnlock;
         public final Map<String, Set<Integer>> active = new HashMap<>();
     }
     private final State state;

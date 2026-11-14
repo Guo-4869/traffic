@@ -14,14 +14,15 @@ final class Store extends SQLiteOpenHelper {
     record Gap(long start, long end, String reason) {}
     record ReportRow(String kind, long start, long end, String payload) {}
     static final class Snapshot {
-        long cursor, captureStart;
+        long cursor, captureStart, unlockStart;
         SessionEngine.State state = new SessionEngine.State();
         final List<Session> sessions = new ArrayList<>();
         final List<SessionEngine.Transition> transitions = new ArrayList<>();
+        final List<Long> unlocks = new ArrayList<>();
         final List<Gap> gaps = new ArrayList<>();
         final Map<String, String> labels = new HashMap<>();
     }
-    Store(Context context) { super(context, "traffic.db", null, 1); }
+    Store(Context context) { super(context, "traffic.db", null, 2); }
     @Override public void onConfigure(SQLiteDatabase db) {
         // This PRAGMA returns a row even when assigning; execSQL rejects row queries.
         try (Cursor cursor=db.rawQuery("PRAGMA secure_delete=ON",null)) {
@@ -34,12 +35,14 @@ final class Store extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE sessions (pkg TEXT NOT NULL, start INTEGER NOT NULL, end INTEGER, reason TEXT, clipped INTEGER NOT NULL, active_since INTEGER, spans TEXT NOT NULL, PRIMARY KEY(pkg,start))");
         db.execSQL("CREATE INDEX sessions_end ON sessions(end)");
         db.execSQL("CREATE TABLE transitions (source TEXT NOT NULL, destination TEXT NOT NULL, time INTEGER NOT NULL)");
+        db.execSQL("CREATE TABLE unlocks (time INTEGER PRIMARY KEY)");
         db.execSQL("CREATE TABLE labels (pkg TEXT PRIMARY KEY, name TEXT NOT NULL)");
         db.execSQL("CREATE TABLE gaps (start INTEGER NOT NULL, end INTEGER NOT NULL, reason TEXT NOT NULL)");
         db.execSQL("CREATE TABLE reports (kind TEXT NOT NULL, start INTEGER NOT NULL, end INTEGER NOT NULL, payload TEXT NOT NULL, PRIMARY KEY(kind,start))");
     }
     @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        throw new IllegalStateException("Database migration required");
+        if(oldVersion==1 && newVersion==2) db.execSQL("CREATE TABLE unlocks (time INTEGER PRIMARY KEY)");
+        else throw new IllegalStateException("Database migration required");
     }
     Snapshot load(long now) throws JSONException {
         Snapshot s = new Snapshot();
@@ -49,6 +52,7 @@ final class Store extends SQLiteOpenHelper {
             while (c.moveToNext()) switch (c.getString(0)) {
                 case "cursor" -> s.cursor = Long.parseLong(c.getString(1));
                 case "capture_start" -> s.captureStart = Long.parseLong(c.getString(1));
+                case "unlock_start" -> s.unlockStart=Long.parseLong(c.getString(1));
                 case "state" -> {
                     JSONObject j = new JSONObject(c.getString(1));
                     s.state.interactive = j.optBoolean("interactive");
@@ -56,6 +60,7 @@ final class Store extends SQLiteOpenHelper {
                     s.state.boundary = j.optLong("boundary");
                     s.state.focus = j.isNull("focus") ? null : j.optString("focus",null);
                     s.state.focusEnded = j.optLong("focusEnded");
+                    s.state.lastUnlock=j.optLong("lastUnlock");
                     JSONObject active = j.optJSONObject("active");
                     if (active != null) {
                         Iterator<String> keys = active.keys();
@@ -86,6 +91,9 @@ final class Store extends SQLiteOpenHelper {
             }
         }
         SessionEngine.prune(s.sessions, cutoff);
+        try(Cursor c=db.rawQuery("SELECT time FROM unlocks WHERE time>=? ORDER BY time",new String[]{""+cutoff})) {
+            while(c.moveToNext()) s.unlocks.add(c.getLong(0));
+        }
         try (Cursor c = db.rawQuery("SELECT source,destination,time FROM transitions WHERE time>=? ORDER BY time", new String[]{""+cutoff})) {
             while (c.moveToNext()) s.transitions.add(new SessionEngine.Transition(c.getString(0),c.getString(1),c.getLong(2)));
         }
@@ -101,6 +109,7 @@ final class Store extends SQLiteOpenHelper {
         SessionEngine.prune(s.sessions, now - RETENTION);
         s.gaps.removeIf(g -> g.end <= now - RETENTION);
         s.transitions.removeIf(t -> t.time() < now-RETENTION);
+        s.unlocks.removeIf(t->t<now-RETENTION);
         Set<String> retained = new HashSet<>(s.state.active.keySet());
         for (Session session : s.sessions) retained.add(session.pkg);
         for (var t : s.transitions) { retained.add(t.from()); retained.add(t.to()); }
@@ -109,11 +118,12 @@ final class Store extends SQLiteOpenHelper {
         for (var e : s.state.active.entrySet()) active.put(e.getKey(), new JSONArray(e.getValue()));
         j.put("interactive", s.state.interactive).put("unlocked", s.state.unlocked)
                 .put("boundary", s.state.boundary).put("active", active)
-                .put("focus",s.state.focus).put("focusEnded",s.state.focusEnded);
+                .put("focus",s.state.focus).put("focusEnded",s.state.focusEnded).put("lastUnlock",s.state.lastUnlock);
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
             putMeta(db,"cursor", ""+s.cursor); putMeta(db,"capture_start", ""+s.captureStart);
+            putMeta(db,"unlock_start",""+s.unlockStart);
             putMeta(db,"state",j.toString());
             db.delete("sessions", null, null);
             for (Session item : s.sessions) {
@@ -127,6 +137,10 @@ final class Store extends SQLiteOpenHelper {
                 db.insertOrThrow("sessions",null,v);
             }
             db.delete("labels", null, null);
+            db.delete("unlocks",null,null);
+            for(long time:s.unlocks) {
+                ContentValues v=new ContentValues();v.put("time",time);db.insertOrThrow("unlocks",null,v);
+            }
             db.delete("transitions",null,null);
             for (var t : s.transitions) {
                 ContentValues v = new ContentValues(); v.put("source",t.from()); v.put("destination",t.to()); v.put("time",t.time());
@@ -158,7 +172,7 @@ final class Store extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
-            for (String table : List.of("sessions","transitions","labels","gaps","reports","meta")) db.delete(table,null,null);
+            for (String table : List.of("sessions","transitions","unlocks","labels","gaps","reports","meta")) db.delete(table,null,null);
             db.setTransactionSuccessful();
         } finally { db.endTransaction(); }
         db.execSQL("VACUUM");

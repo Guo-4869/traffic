@@ -25,6 +25,6 @@ if ($Proxy) {
 if ($LASTEXITCODE -ne 0) { throw "Gradle failed ($LASTEXITCODE)" }
 if (Test-Path -LiteralPath "$root\app\build\outputs\apk\debug\app-debug.apk") {
     New-Item -ItemType Directory -Force -Path "$root\dist" | Out-Null
-    Copy-Item -LiteralPath "$root\app\build\outputs\apk\debug\app-debug.apk" -Destination "$root\dist\Traffic-0.1.0-debug.apk" -Force
-    Get-FileHash -LiteralPath "$root\dist\Traffic-0.1.0-debug.apk" -Algorithm SHA256
+    Copy-Item -LiteralPath "$root\app\build\outputs\apk\debug\app-debug.apk" -Destination "$root\dist\Traffic-0.2.0-debug.apk" -Force
+    Get-FileHash -LiteralPath "$root\dist\Traffic-0.2.0-debug.apk" -Algorithm SHA256
 }

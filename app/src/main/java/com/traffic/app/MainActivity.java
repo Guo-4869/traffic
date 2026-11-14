@@ -90,7 +90,7 @@ public final class MainActivity extends Activity {
         if(!TrafficApplication.enabled(this) || !UsageAccess.granted(this)) {
             LinearLayout card=card(content);
             text(card,"你的使用数据，只留在这台设备",19,ink,true);
-            text(card,"Traffic 只保存 App 名称、包名、打开与离开前台的时间，并据此统计 App 之间的流动。不会读取页面、输入、通知内容、按键或截图。",14,muted,false);
+            text(card,"Traffic 保存 App 名称、包名、打开与离开前台的时间，以及用于计数的解锁时间。不会读取页面、输入、通知内容、按键或截图。",14,muted,false);
             card.addView(button("了解并开启记录",()->consent()));
         }
         if(tab==0) overview(content);
@@ -98,23 +98,7 @@ public final class MainActivity extends Activity {
         else reports();
     }
     private void overview(LinearLayout parent) {
-        LinearLayout choices=row();
-        choices.addView(button(sevenDays?"今日":"● 今日",()->{sevenDays=false;render();}),weight());
-        choices.addView(button(sevenDays?"● 近 7 天":"近 7 天",()->{sevenDays=true;render();}),weight());
-        parent.addView(choices);
-        long now=System.currentTimeMillis();
-        long start=sevenDays?now-Store.RETENTION:Reports.dayStart(now,ZoneId.systemDefault());
-        long end=Math.max(start,Math.min(now,data.snapshot().cursor));
-        var summary=Reports.summarize(data.snapshot().sessions,data.snapshot().transitions,start,end,data.snapshot().cursor);
-        summaryView(parent,summary);
-        LinearLayout note=card(parent);
-        text(note,"数据说明",16,ink,true);
-        text(note,"“打开 / 关闭”指进入 / 离开前台，不代表进程启动或退出。5 秒内同 App 的重复会话会合并。流向记录独立保留，不因会话合并消失。",13,muted,false);
-        text(note,"系统历史与后台调度均为尽力模式；日报允许延迟补算。分屏时多个 App 可同时计时，总时长可能大于屏幕使用时长。",13,muted,false);
-        if(data.snapshot().captureStart>start) text(note,"本区间包含开启记录前的时间，统计不完整。",13,Color.rgb(151,92,12),false);
-        for(Store.Gap gap:data.snapshot().gaps) if(gap.start()<end && gap.end()>start)
-            text(note,"缺失 / 不确定："+format(gap.start())+" — "+format(gap.end())+"\n"+gap.reason(),12,Color.rgb(151,92,12),false);
-        text(note,"上次拉取至："+(data.snapshot().cursor==0?"尚未开始":format(data.snapshot().cursor)),12,muted,false);
+        parent.addView(new Dashboard(this,data.snapshot(),System.currentTimeMillis()));
     }
     private void summaryView(LinearLayout parent,Reports.Summary summary) {
         LinearLayout metrics=card(parent);
@@ -127,7 +111,7 @@ public final class MainActivity extends Activity {
         text(ranking,"时间花在哪里",19,ink,true);
         if(summary.apps().isEmpty()) text(ranking,"暂无使用记录。授权后正常使用其他 App，再返回刷新。",14,muted,false);
         else {
-            ranking.addView(new Charts.Bars(this,summary.apps(),data.snapshot().labels));
+            ranking.addView(new VisualCharts.Bars(this,summary.apps(),data.snapshot().labels,new VisualCharts.Palette(data.snapshot().labels.keySet())));
             for(var a:summary.apps()) text(ranking,name(a.pkg())+"  ·  "+a.opens()+" 次打开"+(a.unknownEnds()>0?"  ·  "+a.unknownEnds()+" 次结束时间未知":""),12,muted,false);
         }
         LinearLayout flows=card(parent);
@@ -135,7 +119,7 @@ public final class MainActivity extends Activity {
         text(flows,"相邻前台进入关系 · 方向分别计数 · 锁屏切断流向",12,muted,false);
         if(summary.flows().isEmpty()) text(flows,"暂无流动记录。连续使用两个不同 App 后会在这里显示。",14,muted,false);
         else {
-            flows.addView(new Charts.Flows(this,summary.flows(),data.snapshot().labels));
+            flows.addView(new VisualCharts.Sankey(this,summary.flows(),data.snapshot().labels,new VisualCharts.Palette(data.snapshot().labels.keySet())));
             for(var f:summary.flows()) text(flows,name(f.from())+" → "+name(f.to())+"   "+f.count()+" 次",13,ink,false);
         }
     }
@@ -205,7 +189,7 @@ public final class MainActivity extends Activity {
     }
     private void consent() {
         new AlertDialog.Builder(this).setTitle("开启本地使用统计")
-            .setMessage("将记录授权后的 App 名称、包名及进入 / 离开前台的时间，用于时长、次数和流动可视化。\n\n不采集页面和操作内容；数据仅保存最近 7 天，不上传。后台可能延迟，无法保证完整不漏。")
+            .setMessage("将记录授权后的 App 名称、包名、进入 / 离开前台的时间及解锁时间，用于时长、打开次数、解锁次数和流动可视化。桌面使用不记录。\n\n不采集页面和操作内容；数据仅保存最近 7 天，不上传。后台可能延迟，无法保证完整不漏。")
             .setNegativeButton("暂不开启",null).setPositiveButton("同意并继续",(dialog,which)->{
                 ((TrafficApplication)getApplication()).setEnabled(true);
                 if(UsageAccess.granted(this)) refreshData(); else openUsageSettings();

@@ -24,6 +24,7 @@ final class Collector {
         long now=System.currentTimeMillis();
         try (Store store=new Store(c)) {
             Store.Snapshot s=store.load(now);
+            HomeApps.remove(s,HomeApps.packages(c));
             if(s.cursor>0) {
                 new SessionEngine(s.state,s.sessions).discontinuity(s.cursor);
                 addGap(s,s.cursor,now,"重新开启前未记录");
@@ -32,6 +33,7 @@ final class Collector {
             s.state.interactive=DeviceGate.canCollect(c); s.state.unlocked=s.state.interactive;
             s.state.boundary=now; s.cursor=now;
             if(s.captureStart==0) s.captureStart=now;
+            if(s.unlockStart==0) s.unlockStart=now;
             store.save(s,buildReports(s,now),now);
         }
     }
@@ -39,6 +41,8 @@ final class Collector {
         long now = System.currentTimeMillis();
         try (Store store = new Store(context)) {
             Store.Snapshot s = store.load(now);
+            HomeApps.remove(s,HomeApps.packages(context));
+            if(s.captureStart>0 && s.unlockStart==0)s.unlockStart=now;
             String message;
             boolean granted = UsageAccess.granted(context);
             if (!TrafficApplication.enabled(context)) {
@@ -63,6 +67,7 @@ final class Collector {
                 long end = now - SessionEngine.MERGE_MS;
                 if (s.captureStart == 0) {
                     s.captureStart = now; s.cursor = now;
+                    s.unlockStart=now;
                     s.state.interactive = true; s.state.unlocked = true;
                     s.state.boundary = now;
                     message = "已开始记录；仅记录授权后发生的使用会话";
@@ -81,6 +86,8 @@ final class Collector {
                     }
                 }
             }
+            // A deferred query may reload the pre-filter snapshot; scrub before every commit.
+            HomeApps.remove(s,HomeApps.packages(context));
             resolveLabels(s);
             SessionEngine.prune(s.sessions,now-Store.RETENTION);
             List<Store.ReportRow> reports = buildReports(s, now);
@@ -103,6 +110,7 @@ final class Collector {
             engine.discontinuity(s.cursor);
         }
         UsageEvents.Event event = new UsageEvents.Event();
+        Set<String> homes=HomeApps.packages(context);
         long previous = begin;
         int count = 0;
         while (source.hasNextEvent()) {
@@ -128,7 +136,12 @@ final class Collector {
             }
             previous = event.getTimeStamp();
             String pkg = event.getPackageName();
+            if(kind==SessionEngine.Kind.UNLOCK && event.getTimeStamp()>=s.unlockStart
+                    && event.getTimeStamp()>s.state.lastUnlock) {
+                s.unlocks.add(event.getTimeStamp()); s.state.lastUnlock=event.getTimeStamp();
+            }
             if ((kind == SessionEngine.Kind.RESUME || kind == SessionEngine.Kind.PAUSE) && pkg == null) continue;
+            if((kind==SessionEngine.Kind.RESUME || kind==SessionEngine.Kind.PAUSE) && homes.contains(pkg)) continue;
             // Public UsageEvents has no activity-instance ID. Keep package-level state;
             // do not inspect class/page names or use hidden APIs.
             int id = 0;
@@ -195,7 +208,8 @@ final class Collector {
                 .put("opens",a.opens()).put("unknownEnds",a.unknownEnds()));
         for (var f : summary.flows()) flows.put(new JSONObject().put("from",f.from()).put("to",f.to()).put("count",f.count()));
         JSONObject payload = new JSONObject().put("availableStart",availableStart).put("availableEnd",availableEnd)
-                .put("partial",partial).put("bestEffort",true).put("apps",apps).put("flows",flows);
+                .put("partial",partial).put("bestEffort",true).put("apps",apps).put("flows",flows)
+                .put("unlocks",s.unlocks.stream().filter(t->t>=availableStart && t<availableEnd).count());
         return new Store.ReportRow(kind,start,end,payload.toString());
     }
 }

@@ -2,6 +2,9 @@
 
 Android 本地使用统计：记录 **App 名称、包名、进入 / 离开前台的时间**，展示每日使用情况和 App 之间的流动。Android 9（API 28）及以上，无联网权限、无广告、无前台服务、无无障碍服务。
 
+**许可：非商业使用。商业用途及商业合作须事先联系作者并取得书面授权。**
+联系入口：[GitHub Issues](https://github.com/Guo-4869/traffic/issues)，完整条款见 [LICENSE](LICENSE)。
+
 ## 当前功能
 
 - 首次明确同意后，引导用户开启系统「使用情况访问权限」；不导入同意之前的历史。
@@ -91,3 +94,11 @@ Windows 首次安装官方工具到项目内（`.toolchain` 不提交）：
 官方依据与真机验收步骤见 [docs/decisions.md](docs/decisions.md) 和 [docs/device-validation.md](docs/device-validation.md)。
 
 0.1.0 基线安全审查及仍需加固的调试包 / 资源上限事项见 [docs/security-audit.md](docs/security-audit.md)，其中 APK 哈希仅对应历史 0.1.0。
+
+## 许可与商业合作
+
+Copyright (c) 2026 Guo-4869。本项目采用自定义的非商业源码许可，允许个人非商业自用、学习、研究及符合条款的非商业修改和分发。该许可包含商业用途限制，不是 MIT / Apache 等允许自由商用的开源许可证。
+
+**商用、商业集成、广告变现、付费服务及其他商业合作，请通过 [本仓库 Issues](https://github.com/Guo-4869/traffic/issues) 联系作者，事先取得书面授权。** 仅提交咨询或收到一般回复不代表取得商用许可。
+
+复制和分发时请保留 [LICENSE](LICENSE) 与版权声明；第三方组件分别遵循自身许可证。

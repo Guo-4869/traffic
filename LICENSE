@@ -1,0 +1,115 @@
+Traffic 源码许可协议（非商业）
+Traffic Source License (Non-Commercial)
+
+版本：1.0
+生效日期：2026-11-14
+Copyright (c) 2026 Guo-4869. 保留未明确授予的权利。
+
+一、适用范围
+
+本协议适用于本项目著作权人拥有权利的源代码、文档、编译产物及其衍生作品
+（下称“本软件”）。第三方组件仍适用各自许可证，本协议不改变或替代其条款。
+
+二、非商业许可
+
+在遵守本协议的前提下，允许免费进行以下非商业活动：
+1. 个人学习、研究、测试及私人自用；
+2. 为非商业教学、研究、技术交流引用代码；
+3. 为非商业目的复制、修改及分发本软件和衍生作品。
+
+复制或分发本软件及衍生作品时，必须保留本协议全文和著作权声明，
+注明对原软件所作的修改，并且不得暗示原作者为衍生作品背书。
+
+三、商业用途与商业合作
+
+任何商业用途均须事先联系著作权人并取得明确书面授权。
+商业用途包括但不限于：销售、付费下载、订阅、广告变现、内购，
+集成于商业产品或服务、随硬件销售，以及在商业组织中用于生产经营，
+或基于本软件提供收费定制、技术支持、托管等服务。
+
+个人以私人身份进行非商业自用，不因其任职于商业组织而自动视为商业用途。
+
+商业授权及合作联系方式：
+https://github.com/Guo-4869/traffic/issues
+
+请通过上述仓库 Issues 联系作者 Guo-4869，协商授权范围、费用及合作方式。
+提交咨询、获得一般回复或本仓库公开可见，均不等于已取得商业授权；
+商业授权以双方明确的书面约定为准。
+
+四、第三方组件
+
+AndroidX、WorkManager、Gradle 及其他第三方组件保留各自的许可与著作权。
+分发包含第三方组件的产物时，分发者须同时遵守相关许可证，保留其要求的
+版权、许可及 NOTICE 声明。本协议的商业限制仅适用于本项目著作权人拥有
+权利的部分，不对第三方独立授权的部分追加限制。
+
+五、免责声明
+
+本软件按“现状”提供。在适用法律允许的范围内，不提供任何明示或暗示的
+担保，包括适销性、特定用途适用性及不侵权担保；著作权人不对使用或无法
+使用本软件产生的损失承担责任，包括数据丢失、设备故障和业务中断。
+本条不排除或限制适用法律规定不得排除或限制的责任。
+
+六、终止与保留权利
+
+违反本协议时，本协议授予的许可自动终止；在适用法律允许的范围内，
+应停止未经授权的使用、复制、修改及分发，并删除不再有合法依据持有的副本。
+本协议未明确授予的权利，由著作权人保留。
+
+本协议提供英文参考译文；如存在歧义，以中文版本为准。
+
+----- English reference translation -----
+
+Traffic Source License (Non-Commercial), Version 1.0
+Effective date: 2026-11-14
+Copyright (c) 2026 Guo-4869. All rights not expressly granted are reserved.
+
+1. Scope
+This license covers the source code, documentation, build artifacts and derivative
+works to the extent the project copyright holder owns the relevant rights
+(the "Software"). Third-party components retain their own licenses.
+
+2. Non-commercial permission
+Subject to these terms, permission is granted without charge for non-commercial
+personal study, research, testing and private use; non-commercial teaching and
+technical sharing; and non-commercial copying, modification and redistribution.
+Copies and distributions must retain this license and copyright notice, identify
+modifications, and must not imply endorsement by the original author.
+
+3. Commercial use and cooperation
+Any commercial use requires prior express written authorization from the copyright
+holder. Examples include sales, paid downloads, subscriptions, advertising,
+in-app purchases, integration into commercial products or services, hardware
+bundling, business operations, and paid customization, support or hosting based
+on the Software. Private non-commercial use is not commercial merely because
+the individual is employed by a commercial organization.
+
+For commercial licensing or cooperation, contact Guo-4869 through:
+https://github.com/Guo-4869/traffic/issues
+
+An inquiry, a general reply or public availability of the repository does not
+constitute commercial authorization. Commercial rights require an express
+written agreement.
+
+4. Third-party components
+AndroidX, WorkManager, Gradle and other dependencies retain their own licenses
+and copyrights. Distributors must comply with those licenses, including required
+copyright, license and NOTICE statements. This license adds no restrictions to
+parts independently licensed by third parties.
+
+5. Disclaimer
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE IS PROVIDED "AS IS",
+WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. THE COPYRIGHT HOLDER
+SHALL NOT BE LIABLE FOR LOSSES ARISING FROM USE OR INABILITY TO USE THE SOFTWARE,
+INCLUDING DATA LOSS, DEVICE FAILURE OR BUSINESS INTERRUPTION. THIS DOES NOT
+EXCLUDE OR LIMIT LIABILITY THAT APPLICABLE LAW DOES NOT ALLOW TO BE EXCLUDED.
+
+6. Termination and reserved rights
+Violation terminates the permissions granted under this license. To the extent
+permitted by applicable law, unauthorized use, copying, modification and
+distribution must cease, and copies without a continuing lawful basis must be
+deleted. All rights not expressly granted are reserved.
+
+This English text is a reference translation. The Chinese version prevails in
+case of ambiguity.

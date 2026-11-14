@@ -81,3 +81,5 @@ Windows 首次安装官方工具到项目内（`.toolchain` 不提交）：
 - 内部游标、设备交互布尔状态和包级前台标记仅用于去重和断点恢复，不包含页面标识、页面内容或用户输入。App 名称不可解析时显示包名。
 
 官方依据与真机验收步骤见 [docs/decisions.md](docs/decisions.md) 和 [docs/device-validation.md](docs/device-validation.md)。
+
+当前测试 APK 的安全审查及未解决的加固事项见 [docs/security-audit.md](docs/security-audit.md)。

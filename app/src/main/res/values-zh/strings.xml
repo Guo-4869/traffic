@@ -1,0 +1,138 @@
+<resources>
+    <string name="ui_000" formatted="false">" 秒"</string>
+    <string name="ui_001" formatted="false">" 分"</string>
+    <string name="ui_002" formatted="false">" 小时 "</string>
+    <string name="ui_003" formatted="false">"重新开启前未记录"</string>
+    <string name="ui_004" formatted="false">"记录已暂停"</string>
+    <string name="ui_005" formatted="false">"使用权限不可用"</string>
+    <string name="ui_006" formatted="false">"未授权使用情况访问权限"</string>
+    <string name="ui_007" formatted="false">"设备当前不可交互，已跳过采集"</string>
+    <string name="ui_008" formatted="false">"已开始记录；仅记录授权后发生的使用会话"</string>
+    <string name="ui_009" formatted="false">"设备时间发生回拨"</string>
+    <string name="ui_010" formatted="false">"已刷新；最近 5 秒的事件将在下次拉取时确认"</string>
+    <string name="ui_011" formatted="false">"设备状态已变化，本批次未提交，等待下次补采"</string>
+    <string name="ui_012" formatted="false">"系统未提供使用统计服务"</string>
+    <string name="ui_013" formatted="false">"使用权限已撤销，请重新授权"</string>
+    <string name="ui_014" formatted="false">"系统事件暂不可用，保留游标等待下次补采"</string>
+    <string name="ui_015" formatted="false">"超过 24 小时未拉取，系统历史可能已缺失"</string>
+    <string name="ui_016" formatted="false">"系统事件时间不连续"</string>
+    <string name="ui_017" formatted="false">"已更新使用会话与统计；系统事件按尽力模式提供"</string>
+    <string name="ui_018" formatted="false">"MM月dd日  EEEE"</string>
+    <string name="ui_019" formatted="false">"今日总览"</string>
+    <string name="ui_020" formatted="false">"当日总览"</string>
+    <string name="ui_021" formatted="false">"今天的时间，落在了哪里"</string>
+    <string name="ui_022" formatted="false">"所选日期的使用分布"</string>
+    <string name="ui_023" formatted="false">" 次解锁   ·   "</string>
+    <string name="ui_024" formatted="false">" 次打开   ·   "</string>
+    <string name="ui_025" formatted="false">" 个 App"</string>
+    <string name="ui_026" formatted="false">"其他 App"</string>
+    <string name="ui_027" formatted="false">"总使用时长去除重叠区间；环形图按各 App 累计时长计算占比。"</string>
+    <string name="ui_028" formatted="false">"按日查看"</string>
+    <string name="ui_029" formatted="false">"按周查看"</string>
+    <string name="ui_030" formatted="false">"本地自然周 · 周一至周日"</string>
+    <string name="ui_031" formatted="false">"所选自然日 · 00:00 至次日 00:00"</string>
+    <string name="ui_032" formatted="false">"App 排行"</string>
+    <string name="ui_033" formatted="false">" · 已排除桌面"</string>
+    <string name="ui_034" formatted="false">"流转桑基图"</string>
+    <string name="ui_035" formatted="false">" · 带宽代表切换次数"</string>
+    <string name="ui_036" formatted="false">"收起为主要 App"</string>
+    <string name="ui_037" formatted="false">"展开全部 App 节点"</string>
+    <string name="ui_038" formatted="false">"左侧切出、右侧切入，同一 App 可出现在两侧。默认各侧前 8 个 App 单独显示，其余合并；可展开全部节点。"</string>
+    <string name="ui_039" formatted="false">"忽略桌面后，30 秒内的 A → 桌面 → B 计为 A → B；跨熄屏、锁屏不连接。"</string>
+    <string name="ui_040" formatted="false">" 次"</string>
+    <string name="ui_041" formatted="false">"时间轴甘特图"</string>
+    <string name="ui_042" formatted="false">"MM月dd日"</string>
+    <string name="ui_043" formatted="false">" · 同一 App 保持同一颜色"</string>
+    <string name="ui_044" formatted="false">"仅绘制已知的实际前台区间，短暂离开的间隔留空；结束未知的部分不推测。"</string>
+    <string name="ui_045" formatted="false">"每小时使用强度"</string>
+    <string name="ui_046" formatted="false">" · App × 小时"</string>
+    <string name="ui_047" formatted="false">"横向滑动查看全天，轻点单元格查看时长。颜色越深表示使用越久，空白表示无已记录时长。"</string>
+    <string name="ui_048" formatted="false">"说明"</string>
+    <string name="ui_049" formatted="false">"数据边界"</string>
+    <string name="ui_050" formatted="false">"仅本机保存 · 最近 7 天 · 不记录内容"</string>
+    <string name="ui_051" formatted="false">"解锁次数只统计已记录的系统解锁事件；系统事件缺失或未设锁屏时不推断。"</string>
+    <string name="ui_052" formatted="false">"解锁计数从 "</string>
+    <string name="ui_053" formatted="false">" 开始；更早的解锁次数未记录。"</string>
+    <string name="ui_054" formatted="false">"系统事件与后台执行按尽力模式提供。当前日 / 周、首次记录区间及超出 7 天保留窗口的区间均可能不完整。"</string>
+    <string name="ui_055" formatted="false">"上次拉取至 "</string>
+    <string name="ui_056" formatted="false">"尚未开始"</string>
+    <string name="ui_057" formatted="false">"◌  进行中或数据不完整；不把缺失视为零使用"</string>
+    <string name="ui_058" formatted="false">"✓  已汇总 · 系统事件可能有遗漏"</string>
+    <string name="ui_059" formatted="false">"TRAFFIC  /  使用轨迹"</string>
+    <string name="ui_060" formatted="false">"把时间，看清楚。"</string>
+    <string name="ui_061" formatted="false">"仅记录 App 与时间 · 数据保留 7 天"</string>
+    <string name="ui_062" formatted="false">"正在读取本地记录…"</string>
+    <string name="ui_063" formatted="false">"记录设置"</string>
+    <string name="ui_064" formatted="false">"刷新统计"</string>
+    <string name="ui_065" formatted="false">"概览"</string>
+    <string name="ui_066" formatted="false">"时间线"</string>
+    <string name="ui_067" formatted="false">"日报 / 周报"</string>
+    <string name="ui_068" formatted="false">"正在同步系统使用事件…"</string>
+    <string name="ui_069" formatted="false">"读取失败；已有记录未覆盖，请稍后刷新"</string>
+    <string name="ui_070" formatted="false">"暂时无法读取本地记录，请重新打开 App 后重试。"</string>
+    <string name="ui_071" formatted="false">"你的使用数据，只留在这台设备"</string>
+    <string name="ui_072" formatted="false">"Traffic 保存 App 名称、包名、打开与离开前台的时间，以及用于计数的解锁时间。不会读取页面、输入、通知内容、按键或截图。"</string>
+    <string name="ui_073" formatted="false">"了解并开启记录"</string>
+    <string name="ui_074" formatted="false">"前台累计时长    "</string>
+    <string name="ui_075" formatted="false">" 次打开    "</string>
+    <string name="ui_076" formatted="false">" 次流动"</string>
+    <string name="ui_077" formatted="false">"时间花在哪里"</string>
+    <string name="ui_078" formatted="false">"暂无使用记录。授权后正常使用其他 App，再返回刷新。"</string>
+    <string name="ui_079" formatted="false">" 次打开"</string>
+    <string name="ui_080" formatted="false">" 次结束时间未知"</string>
+    <string name="ui_081" formatted="false">"App 之间的流动"</string>
+    <string name="ui_082" formatted="false">"相邻前台进入关系 · 方向分别计数 · 锁屏切断流向"</string>
+    <string name="ui_083" formatted="false">"暂无流动记录。连续使用两个不同 App 后会在这里显示。"</string>
+    <string name="ui_084" formatted="false">"最近 7 天的使用时间线"</string>
+    <string name="ui_085" formatted="false">"原始时间精确到秒；最近 5 秒等待下次拉取确认。"</string>
+    <string name="ui_086" formatted="false">"还没有会话记录。"</string>
+    <string name="ui_087" formatted="false">"打开  "</string>
+    <string name="ui_088" formatted="false">"（保留边界截断）"</string>
+    <string name="ui_089" formatted="false">"截至上次拉取仍在前台"</string>
+    <string name="ui_090" formatted="false">"未知，未计入时长"</string>
+    <string name="ui_091" formatted="false">"关闭  "</string>
+    <string name="ui_092" formatted="false">"熄屏边界结束"</string>
+    <string name="ui_093" formatted="false">"锁屏边界结束"</string>
+    <string name="ui_094" formatted="false">"系统关机、时间变化或历史不连续，结束时间未知"</string>
+    <string name="ui_095" formatted="false">"加载更多"</string>
+    <string name="ui_096" formatted="false">"日报与周报"</string>
+    <string name="ui_097" formatted="false">"自然日 00:00 分界 · 周一开始 · 自动补算\n过期源数据从报表同步移除，历史周报可能不完整。"</string>
+    <string name="ui_098" formatted="false">"日报 · "</string>
+    <string name="ui_099" formatted="false">"周报 · "</string>
+    <string name="ui_100" formatted="false">"进行中 / 数据不完整 · 系统尽力提供"</string>
+    <string name="ui_101" formatted="false">"已汇总 · 系统事件可能有遗漏"</string>
+    <string name="ui_102" formatted="false">"查看可视化"</string>
+    <string name="ui_103" formatted="false">"关闭"</string>
+    <string name="ui_104" formatted="false">"开启记录后生成第一份日报。"</string>
+    <string name="ui_105" formatted="false">"暂停记录"</string>
+    <string name="ui_106" formatted="false">"开启记录"</string>
+    <string name="ui_107" formatted="false">"系统使用权限"</string>
+    <string name="ui_108" formatted="false">"隐私与统计说明"</string>
+    <string name="ui_109" formatted="false">"清空全部本地记录"</string>
+    <string name="ui_110" formatted="false">"仅本机保存包名、App 名称、使用时间和流向统计。无联网权限，不读取操作内容、页面、键盘、通知或截图。\n\n7 天滚动保留，包含日报和周报的源数据；关闭系统备份和设备迁移。停止运行期间无法准时物理删除，恢复后立即清理。\n\n不运行前台服务或无障碍服务。熄屏不主动轮询；系统启动后台任务后检查并退出仍可能有少量开销，不能承诺绝对零功耗。\n\n流向表示前台进入顺序，不证明用户点击；分屏不等同于唯一焦点。无匹配结束事件时标记未知，不伪造时间。"</string>
+    <string name="ui_111" formatted="false">"知道了"</string>
+    <string name="ui_112" formatted="false">"清空本地记录？"</string>
+    <string name="ui_113" formatted="false">"所有使用会话、流向与报表都会删除，并暂停记录。"</string>
+    <string name="ui_114" formatted="false">"取消"</string>
+    <string name="ui_115" formatted="false">"清空"</string>
+    <string name="ui_116" formatted="false">"开启本地使用统计"</string>
+    <string name="ui_117" formatted="false">"将记录授权后的 App 名称、包名、进入 / 离开前台的时间及解锁时间，用于时长、打开次数、解锁次数和流动可视化。桌面使用不记录。\n\n不采集页面和操作内容；数据仅保存最近 7 天，不上传。后台可能延迟，无法保证完整不漏。"</string>
+    <string name="ui_118" formatted="false">"暂不开启"</string>
+    <string name="ui_119" formatted="false">"同意并继续"</string>
+    <string name="ui_120" formatted="false">"请到系统设置中搜索“使用情况访问权限”"</string>
+    <string name="ui_121" formatted="false">"暂无可视化数据"</string>
+    <string name="ui_122" formatted="false">"Top5 App 时长占比，图例列出各 App 时长与百分比"</string>
+    <string name="ui_123" formatted="false">"APP 时长占比"</string>
+    <string name="ui_124" formatted="false">" 个主要 App"</string>
+    <string name="ui_125" formatted="false">"App 排行，横条表示时长，右侧列出打开次数"</string>
+    <string name="ui_126" formatted="false">"一天内各 App 的实际前台使用区间，横轴从零点到次日零点；可点按色块查看时间"</string>
+    <string name="ui_127" formatted="false">"本地时间 · 轻点色块查看起止时间"</string>
+    <string name="ui_128" formatted="false">"App 乘以小时热力图，颜色越深表示前台使用时长越长，可点按单元格查看分钟数"</string>
+    <string name="ui_129" formatted="false">"少"</string>
+    <string name="ui_130" formatted="false">"多"</string>
+    <string name="ui_131" formatted="false">"App 流转桑基图，左侧为切出 App，右侧为切入 App，带宽与切换次数成正比；"</string>
+    <string name="ui_132" formatted="false">"显示全部 App 节点"</string>
+    <string name="ui_133" formatted="false">"显示各侧前八个 App，其余汇总，可展开全部"</string>
+    <string name="ui_134" formatted="false">"切出 APP"</string>
+    <string name="ui_135" formatted="false">"切入 APP"</string>
+</resources>

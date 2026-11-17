@@ -1,0 +1,138 @@
+<resources>
+    <string name="ui_000" formatted="false">" sec"</string>
+    <string name="ui_001" formatted="false">" min"</string>
+    <string name="ui_002" formatted="false">" h "</string>
+    <string name="ui_003" formatted="false">"Not recorded before tracking resumed"</string>
+    <string name="ui_004" formatted="false">"Tracking paused"</string>
+    <string name="ui_005" formatted="false">"Usage access unavailable"</string>
+    <string name="ui_006" formatted="false">"Usage access has not been granted"</string>
+    <string name="ui_007" formatted="false">"Device is locked or asleep; collection skipped"</string>
+    <string name="ui_008" formatted="false">"Tracking started; only subsequent sessions will be recorded"</string>
+    <string name="ui_009" formatted="false">"Device clock moved backward"</string>
+    <string name="ui_010" formatted="false">"Updated; the latest 5 seconds will be confirmed next time"</string>
+    <string name="ui_011" formatted="false">"Device state changed; this batch was not committed"</string>
+    <string name="ui_012" formatted="false">"Usage statistics service unavailable"</string>
+    <string name="ui_013" formatted="false">"Usage access was revoked; please grant it again"</string>
+    <string name="ui_014" formatted="false">"System events unavailable; checkpoint kept for a later retry"</string>
+    <string name="ui_015" formatted="false">"No collection for over 24 hours; some history may be missing"</string>
+    <string name="ui_016" formatted="false">"System event timestamps are inconsistent"</string>
+    <string name="ui_017" formatted="false">"Sessions and reports updated; system history is best effort"</string>
+    <string name="ui_018" formatted="false">"MMM d, EEEE"</string>
+    <string name="ui_019" formatted="false">"Today at a glance"</string>
+    <string name="ui_020" formatted="false">"Day at a glance"</string>
+    <string name="ui_021" formatted="false">"A clearer picture of your day"</string>
+    <string name="ui_022" formatted="false">"Usage on the selected date"</string>
+    <string name="ui_023" formatted="false">" unlocks   ·   "</string>
+    <string name="ui_024" formatted="false">" opens   ·   "</string>
+    <string name="ui_025" formatted="false">" apps"</string>
+    <string name="ui_026" formatted="false">"Other apps"</string>
+    <string name="ui_027" formatted="false">"Total time excludes overlaps. The ring shows each app\'s share of cumulative app time."</string>
+    <string name="ui_028" formatted="false">"Day"</string>
+    <string name="ui_029" formatted="false">"Week"</string>
+    <string name="ui_030" formatted="false">"Calendar week · Monday to Sunday"</string>
+    <string name="ui_031" formatted="false">"Selected day · midnight to midnight"</string>
+    <string name="ui_032" formatted="false">"App ranking"</string>
+    <string name="ui_033" formatted="false">" · Home apps excluded"</string>
+    <string name="ui_034" formatted="false">"App flow Sankey"</string>
+    <string name="ui_035" formatted="false">" · Width represents switches"</string>
+    <string name="ui_036" formatted="false">"Show main apps"</string>
+    <string name="ui_037" formatted="false">"Show all app nodes"</string>
+    <string name="ui_038" formatted="false">"Left: outgoing; right: incoming. An app can appear on both sides. The top 8 on each side are shown by default; expand to see all nodes."</string>
+    <string name="ui_039" formatted="false">"Home transitions are skipped: A → Home → B within 30 seconds counts as A → B. Locking or screen-off breaks the flow."</string>
+    <string name="ui_040" formatted="false">" switches"</string>
+    <string name="ui_041" formatted="false">"Usage timeline"</string>
+    <string name="ui_042" formatted="false">"MMM d"</string>
+    <string name="ui_043" formatted="false">" · Consistent colors per app"</string>
+    <string name="ui_044" formatted="false">"Only known foreground intervals are shown. Short gaps remain empty; unknown endings are not estimated."</string>
+    <string name="ui_045" formatted="false">"Hourly intensity"</string>
+    <string name="ui_046" formatted="false">" · App × hour"</string>
+    <string name="ui_047" formatted="false">"Scroll to explore the day. Tap a cell for duration. Darker cells mean more use; pale cells mean no recorded time."</string>
+    <string name="ui_048" formatted="false">"Notes"</string>
+    <string name="ui_049" formatted="false">"Data coverage"</string>
+    <string name="ui_050" formatted="false">"On-device only · Last 7 days · No content recorded"</string>
+    <string name="ui_051" formatted="false">"Unlocks count recorded system unlock events only. Missing events or devices without a lock screen are not estimated."</string>
+    <string name="ui_052" formatted="false">"Unlock counting started at "</string>
+    <string name="ui_053" formatted="false">"; earlier unlocks were not recorded."</string>
+    <string name="ui_054" formatted="false">"System history and background scheduling are best effort. Current periods, initial recording periods and data beyond 7 days may be incomplete."</string>
+    <string name="ui_055" formatted="false">"Last collected through "</string>
+    <string name="ui_056" formatted="false">"Not started"</string>
+    <string name="ui_057" formatted="false">"◌  In progress or incomplete; missing data is not zero usage"</string>
+    <string name="ui_058" formatted="false">"✓  Summarized · System events may still be missing"</string>
+    <string name="ui_059" formatted="false">"TRAFFIC  /  USAGE INSIGHTS"</string>
+    <string name="ui_060" formatted="false">"See your time clearly."</string>
+    <string name="ui_061" formatted="false">"Apps and timestamps only · Kept for 7 days"</string>
+    <string name="ui_062" formatted="false">"Reading local records…"</string>
+    <string name="ui_063" formatted="false">"Settings"</string>
+    <string name="ui_064" formatted="false">"Refresh"</string>
+    <string name="ui_065" formatted="false">"Overview"</string>
+    <string name="ui_066" formatted="false">"Timeline"</string>
+    <string name="ui_067" formatted="false">"Reports"</string>
+    <string name="ui_068" formatted="false">"Syncing system usage events…"</string>
+    <string name="ui_069" formatted="false">"Could not read data; existing records were preserved"</string>
+    <string name="ui_070" formatted="false">"Local records are temporarily unavailable. Reopen the app and try again."</string>
+    <string name="ui_071" formatted="false">"Your usage stays on this device"</string>
+    <string name="ui_072" formatted="false">"Traffic stores app names, packages, foreground start/end times and unlock timestamps for counting. It does not read screens, input, notification content, keys or screenshots."</string>
+    <string name="ui_073" formatted="false">"Review and start tracking"</string>
+    <string name="ui_074" formatted="false">"Cumulative foreground time    "</string>
+    <string name="ui_075" formatted="false">" opens    "</string>
+    <string name="ui_076" formatted="false">" switches"</string>
+    <string name="ui_077" formatted="false">"Where your time goes"</string>
+    <string name="ui_078" formatted="false">"No usage yet. After granting access, use other apps and return to refresh."</string>
+    <string name="ui_079" formatted="false">" opens"</string>
+    <string name="ui_080" formatted="false">" unknown endings"</string>
+    <string name="ui_081" formatted="false">"Flows between apps"</string>
+    <string name="ui_082" formatted="false">"Adjacent foreground entries · Directions counted separately · Locking breaks flows"</string>
+    <string name="ui_083" formatted="false">"No flows yet. Use two different apps in sequence, then refresh."</string>
+    <string name="ui_084" formatted="false">"Usage timeline · Last 7 days"</string>
+    <string name="ui_085" formatted="false">"Timestamps include seconds. The latest 5 seconds await the next collection."</string>
+    <string name="ui_086" formatted="false">"No sessions recorded yet."</string>
+    <string name="ui_087" formatted="false">"Opened  "</string>
+    <string name="ui_088" formatted="false">" (clipped at retention boundary)"</string>
+    <string name="ui_089" formatted="false">"Still foreground at last collection"</string>
+    <string name="ui_090" formatted="false">"Unknown; excluded from duration"</string>
+    <string name="ui_091" formatted="false">"Closed  "</string>
+    <string name="ui_092" formatted="false">"Ended at screen-off boundary"</string>
+    <string name="ui_093" formatted="false">"Ended at lock-screen boundary"</string>
+    <string name="ui_094" formatted="false">"Unknown ending due to shutdown, clock changes or missing history"</string>
+    <string name="ui_095" formatted="false">"Load more"</string>
+    <string name="ui_096" formatted="false">"Daily and weekly reports"</string>
+    <string name="ui_097" formatted="false">"Days start at local midnight; weeks start on Monday. Reports catch up automatically. Expired source data is removed from reports, so older weekly reports may be incomplete."</string>
+    <string name="ui_098" formatted="false">"Daily · "</string>
+    <string name="ui_099" formatted="false">"Weekly · "</string>
+    <string name="ui_100" formatted="false">"In progress / incomplete · Best effort"</string>
+    <string name="ui_101" formatted="false">"Summarized · System events may be missing"</string>
+    <string name="ui_102" formatted="false">"View charts"</string>
+    <string name="ui_103" formatted="false">"Close"</string>
+    <string name="ui_104" formatted="false">"Start tracking to generate your first report."</string>
+    <string name="ui_105" formatted="false">"Pause tracking"</string>
+    <string name="ui_106" formatted="false">"Start tracking"</string>
+    <string name="ui_107" formatted="false">"System usage access"</string>
+    <string name="ui_108" formatted="false">"Privacy and statistics"</string>
+    <string name="ui_109" formatted="false">"Clear all local records"</string>
+    <string name="ui_110" formatted="false">"App names, packages, usage and unlock times, and flow statistics stay on this device. No internet permission is requested. Screens, input, keys, notification content and screenshots are not read.\n\nSource data and reports cover only the last 7 days. Cloud backup and device transfer are disabled. Expired data cannot be physically deleted while the app is not running; cleanup occurs on its next run.\n\nNo foreground or accessibility service runs. There is no screen-off polling, but a system-started worker still has a small overhead. Zero power use cannot be guaranteed.\n\nFlows show foreground entry order, not actual taps. Split-screen does not imply a single focus. Missing endings are marked unknown rather than invented."</string>
+    <string name="ui_111" formatted="false">"Got it"</string>
+    <string name="ui_112" formatted="false">"Clear local records?"</string>
+    <string name="ui_113" formatted="false">"All sessions, unlock records, flows and reports will be deleted, and tracking will pause."</string>
+    <string name="ui_114" formatted="false">"Cancel"</string>
+    <string name="ui_115" formatted="false">"Clear"</string>
+    <string name="ui_116" formatted="false">"Enable local usage tracking"</string>
+    <string name="ui_117" formatted="false">"App names, packages, foreground start/end times and unlock times will be recorded after permission is granted, for duration, opens, unlocks and flow charts. Home app usage is excluded.\n\nNo screen or interaction content is collected. Data stays on-device for 7 days and is not uploaded. Background collection may be delayed or incomplete."</string>
+    <string name="ui_118" formatted="false">"Not now"</string>
+    <string name="ui_119" formatted="false">"Agree and continue"</string>
+    <string name="ui_120" formatted="false">"Search for Usage access in your device settings"</string>
+    <string name="ui_121" formatted="false">"No chart data yet"</string>
+    <string name="ui_122" formatted="false">"Top 5 app time shares. The legend lists duration and percentage."</string>
+    <string name="ui_123" formatted="false">"APP TIME SHARE"</string>
+    <string name="ui_124" formatted="false">" top apps"</string>
+    <string name="ui_125" formatted="false">"App ranking: bar length is duration; opens are shown on the right."</string>
+    <string name="ui_126" formatted="false">"Each app\'s known foreground intervals from midnight to midnight. Tap a block for its times."</string>
+    <string name="ui_127" formatted="false">"Local time · Tap a block for times"</string>
+    <string name="ui_128" formatted="false">"App by hour heatmap. Darker cells mean more foreground use. Tap a cell for duration."</string>
+    <string name="ui_129" formatted="false">"Less"</string>
+    <string name="ui_130" formatted="false">"More"</string>
+    <string name="ui_131" formatted="false">"App flow Sankey: outgoing apps on the left, incoming apps on the right. Ribbon width is proportional to switches. "</string>
+    <string name="ui_132" formatted="false">"All app nodes are shown"</string>
+    <string name="ui_133" formatted="false">"The top 8 on each side are shown; others are grouped. Expand to see all."</string>
+    <string name="ui_134" formatted="false">"OUTGOING"</string>
+    <string name="ui_135" formatted="false">"INCOMING"</string>
+</resources>

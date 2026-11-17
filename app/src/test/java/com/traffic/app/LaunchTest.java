@@ -16,9 +16,9 @@ public class LaunchTest {
     @Test public void opensWithoutUsagePermissionAndShowsControls() {
         try(var controller=Robolectric.buildActivity(MainActivity.class).setup()) {
             View root=controller.get().getWindow().getDecorView();
-            assertTrue(contains(root,"把时间，看清楚。"));
-            assertTrue(contains(root,"记录设置"));
-            assertTrue(contains(root,"刷新统计"));
+            assertTrue(contains(root,I18n.t(R.string.ui_060)));
+            assertTrue(contains(root,I18n.t(R.string.ui_063)));
+            assertTrue(contains(root,I18n.t(R.string.ui_064)));
             assertFalse(TrafficApplication.enabled(controller.get()));
         }
     }

@@ -1,0 +1,4 @@
+<resources>
+    <string name="language">语言 / Language</string>
+    <string name="system_language">跟随系统</string>
+</resources>

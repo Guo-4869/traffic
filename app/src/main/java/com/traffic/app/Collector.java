@@ -12,7 +12,7 @@ import java.util.*;
 final class Collector {
     record Result(Store.Snapshot snapshot, List<Store.ReportRow> reports, String message) {}
     private final Context context;
-    Collector(Context context) { this.context = context.getApplicationContext(); }
+    Collector(Context context) { this.context = context.getApplicationContext(); I18n.init(context); }
     /** Shared monitor serializes Activity, broadcasts and WorkManager transactions. */
     synchronized static Result refresh(Context c) throws JSONException {
         return new Collector(c).run();
@@ -21,13 +21,14 @@ final class Collector {
         try (Store store = new Store(c)) { store.clear(); }
     }
     synchronized static void begin(Context c) throws JSONException {
+        I18n.init(c);
         long now=System.currentTimeMillis();
         try (Store store=new Store(c)) {
             Store.Snapshot s=store.load(now);
             HomeApps.remove(s,HomeApps.packages(c));
             if(s.cursor>0) {
                 new SessionEngine(s.state,s.sessions).discontinuity(s.cursor);
-                addGap(s,s.cursor,now,"重新开启前未记录");
+                addGap(s,s.cursor,now,I18n.t(R.string.ui_003));
             }
             s.state=new SessionEngine.State();
             s.state.interactive=DeviceGate.canCollect(c); s.state.unlocked=s.state.interactive;
@@ -48,20 +49,20 @@ final class Collector {
             if (!TrafficApplication.enabled(context)) {
                 if (s.cursor>0) {
                     new SessionEngine(s.state,s.sessions).discontinuity(s.cursor);
-                    addGap(s,s.cursor,now,"记录已暂停");
+                    addGap(s,s.cursor,now,I18n.t(R.string.ui_004));
                     s.cursor=now;
                 }
-                message="记录已暂停";
+                message=I18n.t(R.string.ui_004);
             } else if (!granted) {
                 if (s.cursor > 0) {
                     new SessionEngine(s.state,s.sessions).discontinuity(s.cursor);
-                    addGap(s,s.cursor,now,"使用权限不可用");
+                    addGap(s,s.cursor,now,I18n.t(R.string.ui_005));
                     s.cursor = now;
                 }
-                message = "未授权使用情况访问权限";
+                message = I18n.t(R.string.ui_006);
             } else if (!DeviceGate.canCollect(context)) {
                 // Do not query UsageStats, advance the cursor or start a retry loop while locked/asleep.
-                message = "设备当前不可交互，已跳过采集";
+                message = I18n.t(R.string.ui_007);
             } else {
                 // Avoid finalizing events right at the source's current write edge.
                 long end = now - SessionEngine.MERGE_MS;
@@ -70,19 +71,19 @@ final class Collector {
                     s.unlockStart=now;
                     s.state.interactive = true; s.state.unlocked = true;
                     s.state.boundary = now;
-                    message = "已开始记录；仅记录授权后发生的使用会话";
+                    message = I18n.t(R.string.ui_008);
                 } else if (end <= s.cursor) {
                     if (now < s.cursor) {
                         new SessionEngine(s.state,s.sessions).discontinuity(now);
                         s.cursor = now; s.state.interactive = true; s.state.unlocked = true;
-                        addGap(s,now,now+1,"设备时间发生回拨");
+                        addGap(s,now,now+1,I18n.t(R.string.ui_009));
                     }
-                    message = "已刷新；最近 5 秒的事件将在下次拉取时确认";
+                    message = I18n.t(R.string.ui_010);
                 } else {
                     try { message = collect(s, end, now); }
                     catch (Deferred ignored) {
                         s = store.load(now);
-                        message = "设备状态已变化，本批次未提交，等待下次补采";
+                        message = I18n.t(R.string.ui_011);
                     }
                 }
             }
@@ -98,15 +99,15 @@ final class Collector {
     private String collect(Store.Snapshot s, long end, long now) {
         UsageStatsManager manager = context.getSystemService(UsageStatsManager.class);
         long begin = Math.max(s.cursor, now-Store.RETENTION);
-        if (manager == null) return "系统未提供使用统计服务";
+        if (manager == null) return I18n.t(R.string.ui_012);
         UsageEvents source;
         try { source = manager.queryEvents(begin,end); }
-        catch (SecurityException e) { return "使用权限已撤销，请重新授权"; }
-        if (source == null) return "系统事件暂不可用，保留游标等待下次补采";
+        catch (SecurityException e) { return I18n.t(R.string.ui_013); }
+        if (source == null) return I18n.t(R.string.ui_014);
         SessionEngine engine = new SessionEngine(s.state,s.sessions,s.transitions);
         if (end-s.cursor > 24*60*60*1000L) {
             // There is no public retention/coverage watermark. Conservatively mark long gaps.
-            addGap(s,s.cursor,end,"超过 24 小时未拉取，系统历史可能已缺失");
+            addGap(s,s.cursor,end,I18n.t(R.string.ui_015));
             engine.discontinuity(s.cursor);
         }
         UsageEvents.Event event = new UsageEvents.Event();
@@ -130,7 +131,7 @@ final class Collector {
             };
             if (kind == null) continue;
             if (event.getTimeStamp() < previous) {
-                addGap(s,event.getTimeStamp(),end,"系统事件时间不连续");
+                addGap(s,event.getTimeStamp(),end,I18n.t(R.string.ui_016));
                 engine.discontinuity(previous);
                 continue;
             }
@@ -149,7 +150,7 @@ final class Collector {
         }
         if (!UsageAccess.granted(context) || !DeviceGate.canCollect(context)) throw new Deferred();
         s.cursor = end;
-        return "已更新使用会话与统计；系统事件按尽力模式提供";
+        return I18n.t(R.string.ui_017);
     }
     private static final class Deferred extends RuntimeException {}
     private void resolveLabels(Store.Snapshot s) {

@@ -20,7 +20,11 @@ public final class TrafficApplication extends Application {
     };
     @Override public void onCreate() {
         super.onCreate();
+        I18n.init(this);
         if (enabled(this)) { registerOpportunities(); schedule(this); }
+    }
+    @Override public void onConfigurationChanged(android.content.res.Configuration configuration) {
+        super.onConfigurationChanged(configuration);I18n.init(this);
     }
     static boolean enabled(Context c) {
         return c.getSharedPreferences("settings",MODE_PRIVATE).getBoolean("enabled",false);

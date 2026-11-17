@@ -10,9 +10,9 @@ final class Charts {
     static final int GREEN=Color.rgb(20,108,91), INK=Color.rgb(25,42,43), MUTED=Color.rgb(91,109,111);
     static String duration(long ms) {
         long seconds=ms/1000;
-        if (seconds<60) return seconds+" 秒";
+        if (seconds<60) return seconds+I18n.t(R.string.ui_000);
         long minutes=seconds/60;
-        return minutes<60 ? minutes+" 分" : minutes/60+" 小时 "+minutes%60+" 分";
+        return minutes<60 ? minutes+I18n.t(R.string.ui_001) : minutes/60+I18n.t(R.string.ui_002)+minutes%60+I18n.t(R.string.ui_001);
     }
     static String shorten(Paint p,String text,float width) {
         if(p.measureText(text)<=width) return text;

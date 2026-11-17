@@ -21,7 +21,7 @@ Android 本地使用统计：记录 **App 名称、包名、进入 / 离开前�
 
 ## 安装和使用
 
-1. 构建后安装 `dist/Traffic-0.2.0-debug.apk`（开发测试签名，不是正式发布包）；同签名可覆盖升级，数据库自动迁移保留会话。
+1. 构建后安装 `dist/Traffic-0.3.0-debug.apk`（开发测试签名，不是正式发布包）；同签名可覆盖升级，数据库自动迁移保留会话。
 2. 打开 App，点击「了解并开启记录」，阅读说明后同意。
 3. 在系统设置中为 Traffic 开启「使用情况访问权限」，返回 App。
 4. 正常使用几个其他 App，再回到 Traffic 点击「刷新统计」。最近 5 秒留到下次拉取确认。
@@ -102,3 +102,11 @@ Copyright (c) 2026 Guo-4869。本项目采用自定义的非商业源码许可�
 **商用、商业集成、广告变现、付费服务及其他商业合作，请通过 [本仓库 Issues](https://github.com/Guo-4869/traffic/issues) 联系作者，事先取得书面授权。** 仅提交咨询或收到一般回复不代表取得商用许可。
 
 复制和分发时请保留 [LICENSE](LICENSE) 与版权声明；第三方组件分别遵循自身许可证。
+
+## 中文 / English（0.3.0）
+
+从 [GitHub Releases](https://github.com/Guo-4869/traffic/releases/tag/v0.3.0) 下载最新测试 APK。
+
+在「记录设置 → 语言 / Language」中选择跟随系统、简体中文或 English。语言选择会保留，切换不清空使用记录；Android 13+ 同步系统应用语言设置。其他 App 的显示名称使用其提供的名称，不进行机器翻译。
+
+Choose System, Simplified Chinese, or English in **Settings → Language / 语言**. The choice persists and does not clear usage history. Download the testing APK from GitHub Releases; Android 9+ is required.
